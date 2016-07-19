@@ -29,7 +29,7 @@ public class TestProvider {
         ContentValues values = new ContentValues();
 
         for (int a = 0; a< 10; a++){
-            values.put("name", "奥尼尔" + a);
+            values.put("name", "WWQQ" + a);
             values.put("personid", a);
             resolver.insert(uri, values);
         }
@@ -90,11 +90,59 @@ public class TestProvider {
         resolver.update(uri, values, " personid > ? and personid < ?", new String[]{"3","7"});
     }
 
-    public void testQuery(){
+    public void testQueryAll(){
         StringBuilder stringBuilder = new StringBuilder();
         Uri uri = Uri.parse("content://com.example.providers.personprovider/person");
         ContentResolver resolver = context.getContentResolver();
         Cursor cursor = resolver.query(uri, new String[]{"name","personid"}, null, null, null);
+        while(cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String personid = cursor.getString(cursor.getColumnIndex("personid"));
+
+            stringBuilder = stringBuilder.append("name="+name+" "+"personid="+personid).append("\n");
+        }
+        result.setText(stringBuilder.toString());
+    }
+
+    public void testQueryById(int id){
+        String uri_id = "content://com.example.providers.personprovider/person/" + id;
+        Uri uri = Uri.parse(uri_id);
+        ContentResolver resolver = context.getContentResolver();
+        Cursor cursor = resolver.query(uri, new String[]{"name","personid"}, null, null, null);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        while(cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String personid = cursor.getString(cursor.getColumnIndex("personid"));
+
+            stringBuilder = stringBuilder.append("name="+name+" "+"personid="+personid).append("\n");
+        }
+        result.setText(stringBuilder.toString());
+    }
+
+
+    public void testQueryByName(String  iname){
+        Uri uri = Uri.parse("content://com.example.providers.personprovider/person/");
+        ContentResolver resolver = context.getContentResolver();
+        Cursor cursor = resolver.query(uri, new String[]{"name","personid"}, "name = ?", new String[]{iname}, null);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        while(cursor.moveToNext()){
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String personid = cursor.getString(cursor.getColumnIndex("personid"));
+
+            stringBuilder = stringBuilder.append("name="+name+" "+"personid="+personid).append("\n");
+        }
+        result.setText(stringBuilder.toString());
+    }
+
+
+    public void testQueryArea(){
+        Uri uri = Uri.parse("content://com.example.providers.personprovider/person/");
+        ContentResolver resolver = context.getContentResolver();
+        Cursor cursor = resolver.query(uri, new String[]{"name","personid"}, "personid > ? and personid < ?", new String[]{"5","8"}, null);
+
+        StringBuilder stringBuilder = new StringBuilder();
         while(cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String personid = cursor.getString(cursor.getColumnIndex("personid"));

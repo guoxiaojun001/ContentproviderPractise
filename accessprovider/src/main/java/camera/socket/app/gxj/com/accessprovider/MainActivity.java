@@ -60,7 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 testProvider.testDeleteByArea();
                 break;
             case R.id.query:
-                testProvider.testQuery();
+                //testProvider.testQueryAll();
+                //testProvider.testQueryById(8);
+                //testProvider.testQueryByName("WWQQ4");
+                testProvider.testQueryArea();
                 break;
 
             default:
