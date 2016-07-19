@@ -4,6 +4,18 @@ public class Person {
 
 	private int personid;
 	private String name;
+
+	private String sex;//升级添加列
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+
 	
 	public Person(){}
 	

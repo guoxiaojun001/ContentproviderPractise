@@ -11,14 +11,18 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 	public static final String ALERT_SQL_CREATE_TABLE =
 			"alter table person rename to temp_A";
 
+	//升级使用 添加列才需要
 	private static final String SQL_CREATE_TABLE =
-	"create table  if not exists person (personid integer primary key autoincrement,name varchar(20) not null)";
+	"create table  if not exists person (personid integer primary key autoincrement,name varchar(20) not null,sex varchar(1))";
+			//"create table  if not exists person (personid integer primary key autoincrement,name varchar(20) not null)";
 
-	private String INSERT_DATA = "insert into person select * from temp_A";
+	//private String INSERT_DATA = "insert into person select * ,'' from temp_A";
+	private String INSERT_DATA = "insert into person select *  from temp_A";//升级添加列使用
 	private String DROP_BOOK = "drop table temp_A";
 
 	public DbOpenHelper(Context context) {
-		super(context, "demo.db", null, 5);
+		//修改这个版本号 以进行升级测试
+		super(context, "demo.db", null, 3);
 	}
 
 	@Override

@@ -20,7 +20,8 @@ public class SQLiteHelper {
 	
 	public void save(Person person){//增
 		SQLiteDatabase db = helper.getWritableDatabase();
-		db.execSQL("insert into person(name,personid) values(?,?)",new Object[]{person.getName(),person.getPersonid()});
+		db.execSQL("insert into person(name,personid) values(?,?,?)",
+				new Object[]{person.getName(),person.getPersonid(),person.getSex()});
 		db.close();
 	}
 	

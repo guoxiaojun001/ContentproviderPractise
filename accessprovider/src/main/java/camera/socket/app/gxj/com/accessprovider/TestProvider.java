@@ -28,9 +28,10 @@ public class TestProvider {
         ContentResolver resolver = context.getContentResolver();
         ContentValues values = new ContentValues();
 
-        for (int a = 10; a< 20; a++){
-            values.put("name", "new" + a);
+        for (int a = 5; a< 10; a++){
+            values.put("name", "newqq" + a);
             values.put("personid", a);
+            values.put("sex", "f");
             resolver.insert(uri, values);
         }
     }
