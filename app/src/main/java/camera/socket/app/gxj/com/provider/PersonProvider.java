@@ -86,7 +86,6 @@ public class PersonProvider extends ContentProvider {
 		switch (MATCHER.match(uri)) {
 		case 1:
 			Log.d("Provider"," selection == "  + selection);
-			Log.d("Provider"," selectionArgs == "  + selectionArgs.toString());
 			return sqLiteDatabase.delete("person", selection, selectionArgs);
 		case 2:
 			long rowid = ContentUris.parseId(uri);
